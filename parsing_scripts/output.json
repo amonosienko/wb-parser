@@ -1,0 +1,14 @@
+{
+  "account": {
+    "name": "Anastasia Monosienco",
+    "balance": 1000.0,
+    "currency": "MDL"
+  },
+  "transactions": [
+    {
+      "date": "16 mar. aprilie 2019 14:57",
+      "description": "Plata retail MAIB GREEN HILLS MARKE CHISINAU Moldova, Rep. Of",
+      "ammount": "87,14"
+    }
+  ]
+}
