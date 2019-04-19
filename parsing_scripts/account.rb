@@ -8,7 +8,7 @@ class Account
   end
 
   def get_account_info
-    {:name => @user_name, :balance => @balance, :currency => @currency}
+    { :name => @user_name, :balance => @balance, :currency => @currency }
   end
 
 end

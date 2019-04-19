@@ -1,17 +1,13 @@
-require 'pry'
-require 'nokogiri'
-require 'open-uri'
-
 
 class Transaction
 
-  def initialize(date, description, ammount)
+  def initialize(date, description, amount)
     @date = date
     @description = description
-    @ammount = ammount 
+    @amount = amount 
   end
 
   def get_transaction_info
-    {:date => @date, :description => @description, :ammount => @ammount}
+    { :date => @date, :description => @description, :amount => @amount }
   end
 end
