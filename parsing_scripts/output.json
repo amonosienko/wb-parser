@@ -1,34 +1,49 @@
 {
-  "account"     : {
-    "name"    : "Anastasia Monosienco",
-    "balance" : 509,
+  "account": {
+    "name": "Anastasia Monosienco",
+    "balance": 2301.73,
     "currency": "MDL"
   },
   "transactions": [
     {
-      "date"       : "18 joi aprilie 2019 10:48",
+      "date": "1 mie. mai 2019 09:07",
+      "description": "Moldcell",
+      "amount": 102
+    },
+    {
+      "date": "30 mar. aprilie 2019 00:00",
+      "description": "Cl Deposit Int Due Special",
+      "amount": 0.89
+    },
+    {
+      "date": "26 vin. aprilie 2019 10:22",
+      "description": "Moldcell",
+      "amount": 50
+    },
+    {
+      "date": "24 mie. aprilie 2019 18:28",
+      "description": "Orange",
+      "amount": 30
+    },
+    {
+      "date": "18 joi aprilie 2019 10:48",
       "description": "Plata retail GRANIER A. IULIA CHISINAU Moldova, Rep. Of",
-      "amount"     : "35,00"
+      "amount": 35
     },
     {
-      "date"       : "16 mar. aprilie 2019 14:57",
+      "date": "16 mar. aprilie 2019 14:57",
       "description": "Plata retail MAIB GREEN HILLS MARKE Chisinau      Moldova, Rep. Of",
-      "amount"     : "87,14"
+      "amount": 87.14
     },
     {
-      "date"       : "15 lun. aprilie 2019 15:04",
+      "date": "15 lun. aprilie 2019 15:04",
       "description": "Plata retail MAIB FARMACIA FAMILIEI Chisinau      Moldova, Rep. Of",
-      "amount"     : "116,01"
+      "amount": 116.01
     },
     {
-      "date"       : "11 joi aprilie 2019 14:54",
+      "date": "11 joi aprilie 2019 14:54",
       "description": "Plata retail MAIB IM VINAMEX SRL Chisinau      Moldova, Rep. Of",
-      "amount"     : "171,38"
-    },
-    {
-      "date"       : "8 lun. aprilie 2019 18:30",
-      "description": "Retr.numerar ATM ATM077 \"Shoplandia\" Chisinau (mun.) - Chisinau Moldova, Rep. Of",
-      "amount"     : "100,00"
+      "amount": 171.38
     }
   ]
 }
