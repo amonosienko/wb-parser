@@ -13,14 +13,13 @@ class WBParser
 
   def parse
     autentificate
-    
-    username = get_user_name(Nokogiri::HTML.fragment(browser.div(class: "has-last-entry").html))
-    balance = get_account_balance(Nokogiri::HTML.fragment(browser.div(class: "primary-balance").html))
-    currency = get_account_currency(Nokogiri::HTML.fragment(browser.div(class: "primary-balance").html))
 
-    account = Account.new(username, balance, currency)
+    account_info = get_account_hash(Nokogiri::HTML.fragment(browser.body(class: "owwb-ls-section").html))
+    account = Account.new(account_info[:username], account_info[:balance], account_info[:currency])
 
-    get_transactions_histoty
+    browser.li(class: "tr_history-menu-item").click
+    transactions_html = get_html
+    get_transactions_array(transactions_html)
 
     parsed_info = {:account => account.get_account_info, :transactions => Transactions}
 
@@ -41,6 +40,14 @@ class WBParser
     browser.element(:css => "button[type='submit'][class='wb-button']").click
   end
 
+  def get_account_hash(html)
+    {
+      :username => html.css("div.has-last-entry span.user-name").text,
+      :balance  => html.css("div.primary-balance span")[0].text.sub(".", "").sub(",", ".").to_f,
+      :currency => html.css("div.primary-balance span")[1].text
+    }
+  end
+
   def get_user_name(html)
     html.css("span.user-name").text
   end
@@ -52,12 +59,6 @@ class WBParser
   def get_account_currency(html)
     html.css("span")[1].text
   end
-  
-  def get_transactions_histoty
-    browser.li(class: "tr_history-menu-item").click
-
-    extract_data
-  end
  
   def get_html
     browser.div(class: "day-header").wait_until(&:present?)
@@ -66,31 +67,31 @@ class WBParser
   end
 
   def get_transaction_day (html, index)
-    html.css("div")[index].text
+    html.css("div")[index].text.strip
   end
 
-  def extract_data
-    html = get_html
-    div_tags = html.search("div")   
+  def get_transactions_array(transactions_html)
+    div_tags = transactions_html.search("div")   
 
     month_year = ""
 
     div_tags.each.with_index do |value, index|
-      if html.css("div")[index]["class"] == "month-delimiter" 
-        month_year = html.css("div")[index].text    
-      elsif html.css("div")[index]["class"] == "day-operations" 
-        transactions_info = html.css("div")[index].css("ul[class='operations-list'] li")
+      if transactions_html.css("div")[index]["class"] == "month-delimiter" 
+        month_year = transactions_html.css("div")[index].text.strip
+      elsif transactions_html.css("div")[index]["class"] == "day-operations" 
+        transactions_info = transactions_html.css("div")[index].css("ul[class='operations-list'] li")
 
         transactions_info.each do |transact|
-          time = transact.css("span[class='history-item-time']").text
-          description = transact.css("span[class='history-item-description']").css("a[class='operation-details']").text
-          amount = transact.css("span")[4].css("span[class='amount']").text.sub(".", "").sub(",", ".").to_f 
-          date_time = get_transaction_day(html, index+1) + " " + month_year + " " + time
+          time = transact.css("span[class='history-item-time']").text.strip
+          description = transact.css("span[class='history-item-description']").css("a[class='operation-details']").text.gsub(/\s{2,}/,' ')
+          amount = transact.css("span")[4].css("span[class='amount']").text.sub(",", ".").to_f 
+          date_time = get_transaction_day(transactions_html, index+1) + " " + month_year + " " + time
           curent_transaction = Transaction.new(date_time, description, amount) 
           Transactions << curent_transaction.get_transaction_info
-        end   
+        end
       end
     end
+    Transactions
   end
 
   def generate_json(p_hash)
@@ -99,6 +100,3 @@ class WBParser
     file.close
   end
 end
-
-obj = WBParser.new()
-obj.parse
