@@ -1,0 +1,24 @@
+{
+  "account": {
+    "name": "Anastasia Monosienco",
+    "balance": 1349.0,
+    "currency": "MDL"
+  },
+  "transactions": [
+    {
+      "date": "14 mar. mai 2019 12:37",
+      "description": "Plata retail SUPERMARKET NR 1 CHISINAU Moldova, Rep. Of",
+      "amount": 36.07
+    },
+    {
+      "date": "12 dum. mai 2019 12:48",
+      "description": "Plata retail SUPERMARKET NR 1 CHISINAU Moldova, Rep. Of",
+      "amount": 38.52
+    },
+    {
+      "date": "30 mar. aprilie 2019 00:00",
+      "description": "Cl Deposit Int Due Special",
+      "amount": 0.89
+    }
+  ]
+}
